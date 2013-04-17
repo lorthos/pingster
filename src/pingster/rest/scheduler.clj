@@ -11,10 +11,12 @@
         [clojurewerkz.quartzite.schedule.calendar-interval :only [schedule with-interval-in-minutes]])
   (:import [org.bson.types ObjectId]))
 
-(let [uri (get (System/getenv) "MONGOLAB_URI" "mongodb://127.0.0.1/pingster")]
-  (mg/connect-via-uri! uri))
+(defn init-mongo []
+  (let [uri (get (System/getenv) "MONGOLAB_URI" "mongodb://127.0.0.1/pingster")]
+    (mg/connect-via-uri! uri))
 
-(mg/set-db! (mg/get-db "pingster"))
+  (mg/set-db! (mg/get-db "pingster"))
+  )
 
 (defn json-response [data & [status]]
   {:status (or status 200)

@@ -2,6 +2,7 @@
   (:require [org.httpkit.server :as httpkit]
             [pingster.app :as app]
             [pingster.util.quartz :as q]
+            [pingster.rest.scheduler :as sch]
             [clojurewerkz.quartzite.scheduler :as qs]
             [monger.collection :as mc])
   (:gen-class))
@@ -29,6 +30,7 @@
     (qs/start)
     (println "Started quartz...")
     (println "Initializing existing schedules...")
+    (sch/init-mongo)
     ;initialize existing triggers on startup
     (doseq [trigger (mc/find-maps "triggers")]
       (println "creating persisted schedule" (:_id trigger))

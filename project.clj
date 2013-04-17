@@ -16,4 +16,5 @@
             [lein-deps-tree "0.1.2"]]
   :aot [pingster]
   :war-resources-path "resources/public"
-  :main pingster.server)
+  :main pingster.server
+  :min-lein-version "2.0.0")
